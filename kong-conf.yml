@@ -1,0 +1,277 @@
+_transform: false
+_format_version: '3.0'
+services:
+- client_certificate: 
+  connect_timeout: 60000
+  tags: 
+  ca_certificates: 
+  enabled: true
+  path: /
+  updated_at: 1663684219
+  name: openfaas-fn.sentimentanalysis.pnum-8080
+  id: ce8fdf82-8389-57fb-9d68-b104a04f6df6
+  write_timeout: 60000
+  read_timeout: 60000
+  retries: 5
+  protocol: http
+  tls_verify: 
+  created_at: 1663684219
+  host: sentimentanalysis.openfaas-fn.8080.svc
+  tls_verify_depth: 
+  port: 80
+- client_certificate: 
+  connect_timeout: 60000
+  tags: 
+  ca_certificates: 
+  enabled: true
+  path: /
+  updated_at: 1663684219
+  name: openfaas-fn.hello-python.pnum-8080
+  id: 68fb948e-c703-5ef4-bfec-57226ca61317
+  write_timeout: 60000
+  read_timeout: 60000
+  retries: 5
+  protocol: http
+  tls_verify: 
+  created_at: 1663684219
+  host: hello-python.openfaas-fn.8080.svc
+  tls_verify_depth: 
+  port: 80
+routes:
+- methods:
+  - GET
+  request_buffering: true
+  response_buffering: true
+  https_redirect_status_code: 426
+  headers: 
+  snis: 
+  preserve_host: true
+  tags: 
+  created_at: 1663684219
+  updated_at: 1663684219
+  sources: 
+  name: openfaas-fn.http-get-functions.00
+  id: c989cab2-0d97-580a-b79b-5a7272bc1b50
+  destinations: 
+  hosts: 
+  path_handling: v0
+  protocols:
+  - http
+  - https
+  regex_priority: 200
+  service: ce8fdf82-8389-57fb-9d68-b104a04f6df6
+  strip_path: false
+  paths:
+  - /api/sentiment/
+  - /api/sentiment$
+- methods:
+  - POST
+  request_buffering: true
+  response_buffering: true
+  https_redirect_status_code: 426
+  headers: 
+  snis: 
+  preserve_host: true
+  tags: 
+  created_at: 1663684219
+  updated_at: 1663684219
+  sources: 
+  name: openfaas-fn.http-post-functions.00
+  id: d1e13adf-aa99-5a8a-a5a1-4a8ecba24225
+  destinations: 
+  hosts: 
+  path_handling: v0
+  protocols:
+  - http
+  - https
+  regex_priority: 200
+  service: 68fb948e-c703-5ef4-bfec-57226ca61317
+  strip_path: false
+  paths:
+  - /api/hello/
+  - /api/hello$
+upstreams:
+- client_certificate: 
+  algorithm: round-robin
+  hash_fallback: none
+  hash_fallback_header: 
+  hash_fallback_query_arg: 
+  hash_fallback_uri_capture: 
+  host_header: 
+  tags: 
+  created_at: 1663684219
+  hash_on: none
+  name: hello-python.openfaas-fn.8080.svc
+  id: 450a201f-06f8-5b22-903e-940523814754
+  hash_on_query_arg: 
+  hash_on_uri_capture: 
+  healthchecks:
+    passive:
+      type: http
+      unhealthy:
+        http_statuses:
+        - 429
+        - 500
+        - 503
+        tcp_failures: 0
+        timeouts: 0
+        http_failures: 0
+      healthy:
+        successes: 0
+        http_statuses:
+        - 200
+        - 201
+        - 202
+        - 203
+        - 204
+        - 205
+        - 206
+        - 207
+        - 208
+        - 226
+        - 300
+        - 301
+        - 302
+        - 303
+        - 304
+        - 305
+        - 306
+        - 307
+        - 308
+    threshold: 0
+    active:
+      headers: 
+      timeout: 1
+      healthy:
+        successes: 0
+        interval: 0
+        http_statuses:
+        - 200
+        - 302
+      unhealthy:
+        http_statuses:
+        - 429
+        - 404
+        - 500
+        - 501
+        - 502
+        - 503
+        - 504
+        - 505
+        tcp_failures: 0
+        timeouts: 0
+        http_failures: 0
+        interval: 0
+      https_verify_certificate: true
+      https_sni: 
+      type: http
+      concurrency: 10
+      http_path: /
+  slots: 10000
+  hash_on_cookie: 
+  hash_on_cookie_path: /
+  hash_on_header: 
+- client_certificate: 
+  algorithm: round-robin
+  hash_fallback: none
+  hash_fallback_header: 
+  hash_fallback_query_arg: 
+  hash_fallback_uri_capture: 
+  host_header: 
+  tags: 
+  created_at: 1663684219
+  hash_on: none
+  name: sentimentanalysis.openfaas-fn.8080.svc
+  id: d84ade01-dd37-5cd4-afbb-3b44396ffc55
+  hash_on_query_arg: 
+  hash_on_uri_capture: 
+  healthchecks:
+    passive:
+      type: http
+      unhealthy:
+        http_statuses:
+        - 429
+        - 500
+        - 503
+        tcp_failures: 0
+        timeouts: 0
+        http_failures: 0
+      healthy:
+        successes: 0
+        http_statuses:
+        - 200
+        - 201
+        - 202
+        - 203
+        - 204
+        - 205
+        - 206
+        - 207
+        - 208
+        - 226
+        - 300
+        - 301
+        - 302
+        - 303
+        - 304
+        - 305
+        - 306
+        - 307
+        - 308
+    threshold: 0
+    active:
+      headers: 
+      timeout: 1
+      healthy:
+        successes: 0
+        interval: 0
+        http_statuses:
+        - 200
+        - 302
+      unhealthy:
+        http_statuses:
+        - 429
+        - 404
+        - 500
+        - 501
+        - 502
+        - 503
+        - 504
+        - 505
+        tcp_failures: 0
+        timeouts: 0
+        http_failures: 0
+        interval: 0
+      https_verify_certificate: true
+      https_sni: 
+      type: http
+      concurrency: 10
+      http_path: /
+  slots: 10000
+  hash_on_cookie: 
+  hash_on_cookie_path: /
+  hash_on_header: 
+targets:
+- created_at: 1663684219.707
+  upstream: d84ade01-dd37-5cd4-afbb-3b44396ffc55
+  tags: 
+  weight: 100
+  id: adbd11c2-8e57-53ee-a2e1-523369086873
+  target: 10.1.0.141:8080
+- created_at: 1663684219.707
+  upstream: 450a201f-06f8-5b22-903e-940523814754
+  tags: 
+  weight: 100
+  id: f37f535f-68b4-5dd9-aa1f-fcec7d2c5f4c
+  target: 10.1.0.143:8080
+plugins:
+- name: response-transformer
+  config: 
+    add:
+      headers:
+      - x-new-header:value
+      - x-another-header:something
+    add:
+      json:
+      - new-json-key:some_value
+      - another-json-key:some_value
