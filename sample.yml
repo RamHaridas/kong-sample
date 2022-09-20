@@ -1,0 +1,20 @@
+# HTTP GET METHOD
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: <your-ingressname>
+  namespace: <your-namespace>
+  annotations:
+    konghq.com/methods: "GET"
+spec:
+  ingressClassName: kong
+  rules:
+    - http:
+        paths:
+        - path: /<your-route-name>
+          pathType: Prefix
+          backend:
+            service:
+              name: <your-pod-name>
+              port:
+                number: 8080
