@@ -1,0 +1,41 @@
+# HTTP GET METHOD
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: http-get-functions
+  namespace: openfaas-fn
+  annotations:
+    konghq.com/methods: "GET"
+spec:
+  ingressClassName: kong
+  rules:
+    - http:
+        paths:
+        - path: /api/sentiment
+          pathType: Prefix
+          backend:
+            service:
+              name: sentimentanalysis
+              port:
+                number: 8080
+---
+# HTTP POST METHOD
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: http-post-functions
+  namespace: openfaas-fn
+  annotations:
+    konghq.com/methods: "POST"
+spec:
+  ingressClassName: kong
+  rules:
+    - http:
+        paths:
+        - path: /api/hello
+          pathType: Prefix
+          backend:
+            service:
+              name: hello-python
+              port:
+                number: 8080
